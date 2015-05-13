@@ -1,26 +1,36 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Todo</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <div class="nav">
-    <h1><%= link_to "ToDo", root_path %></h1>
-    <ul>
-      <li><%= link_to "Todo Lists", todo_lists_path %></li>
-    </ul>
-    <br class="clear" />
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<% flash.each do |type, message| %>
-  <div class="alert flash <%= type %>">
-    <%= message %>
-  </div>
-<% end %>
+    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
 
-<%= yield %>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
 
-</body>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="twelve columns">
+          <% if flash[:error] %>
+            <div class="error"><%= flash[:error] %></div>
+          <% end %>
+
+          <%if flash[:notice] %>
+            <div class="notice"><%= flash[:notice] %></div>
+          <% end %>
+
+          <%if flash[:alert] %>
+            <div class="alert"><%= flash[:alert] %></div>
+          <% end %>
+        </div><!-- //.twelve.columns -->
+      </div><!-- //.row -->
+    </div><!-- //.container -->
+    <%= yield %>
+
+  </body>
 </html>
